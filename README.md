@@ -43,8 +43,8 @@ docker-compose up
 
 This creates two new folders next to your `docker-compose.yml` file.
 
-* `wp-data` – used to store and restore database dumps
-* `wp-app` – the location of your WordPress application
+* `wordpress/data` – used to store and restore database dumps
+* `wordpress/app` – the location of your WordPress application
 
 The containers are now built and running. You should be able to access the WordPress installation with the configured IP in the browser address. By default it is `http://127.0.0.1`.
 
@@ -84,8 +84,8 @@ docker-compose down -v
 
 Copy the `docker-compose.yml` file into a new directory. In the directory you create two folders:
 
-* `wp-data` – here you add the database dump
-* `wp-app` – here you copy your existing WordPress code
+* `wordpress/data` – here you add the database dump
+* `wordpress/app` – here you copy your existing WordPress code
 
 You can now use the `up` command:
 
@@ -96,8 +96,8 @@ docker-compose up
 This will create the containers and populate the database with the given dump. You may set your host entry and change it in the database, or you simply overwrite it in `wp-config.php` by adding:
 
 ```
-define('WP_HOME','http://wp-app.local');
-define('WP_SITEURL','http://wp-app.local');
+define('WP_HOME','http://wordpress/app.local');
+define('WP_SITEURL','http://wordpress/app.local');
 ```
 
 ### Creating database dumps
@@ -112,7 +112,7 @@ Configure the volume to load the theme in the container in the `docker-compose.y
 
 ```
 volumes:
-  - ./theme-name/trunk/:/var/www/html/wp-content/themes/theme-name
+  - ./packages/themes/theme-name/trunk/:/var/www/html/wp-content/themes/theme-name
 ```
 
 ### Developing a Plugin
@@ -121,7 +121,7 @@ Configure the volume to load the plugin in the container in the `docker-compose.
 
 ```
 volumes:
-  - ./plugin-name/trunk/:/var/www/html/wp-content/plugins/plugin-name
+  - ./packages/plugins/plugin-name/trunk/:/var/www/html/wp-content/plugins/plugin-name
 ```
 
 ### WP CLI
